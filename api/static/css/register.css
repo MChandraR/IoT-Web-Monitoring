@@ -9,7 +9,7 @@
 
 body{
     align-items: end;
-    height: 90vh;
+    height: 100vh;
 }
 
 .welcome-back{
@@ -41,25 +41,6 @@ button{
     padding : 1.2rem 0;
     font-weight : bold;
     font-size : 1.2rem;
-}
-
-.menu-area{
-    align-items: center;
-    column-gap: .2rem;
-    display:  flex;
-    width : 100%;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    margin-bottom : 1rem;
-}
-
-.remember{
-    text-align: left;
-}
-
-.check-area{
-    display : flex;
-    align-items: center;
 }
 
 p{

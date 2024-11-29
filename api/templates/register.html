@@ -6,7 +6,7 @@
     <title>Document</title>
     <link rel="stylesheet" href="/static/font/roboto.css">
     <link rel="stylesheet" href="/static/css/style.css">
-    <link rel="stylesheet" href="/static/css/login.css">
+    <link rel="stylesheet" href="/static/css/register.css">
 </head>
 <body>
     <div>
@@ -14,19 +14,14 @@
             <img class="logo" src="/static/images/logo.png" alt="" >
             <div class="card">
                 <img id="close-btn" src="/static/images/icon/close.png" alt="">
-                <h5 class="welcome-back">Welcome Back!!!</h5>
-                <h1 class="login-text">Login</h1>
-                <form action="/dashboard">
+                <h5 class="welcome-back">Hello...</h5>
+                <h1 class="login-text">Register</h1>
+                <form action="/login">
                     <input placeholder="Email" class="input" type="text">
-                    <input placeholder="Password" class="input" type="password"></input>
-                    <div class="menu-area">
-                        <div class="check-area">
-                            <input type="checkbox" class="checkbox">Remember me</input>
-                        </div>
-                        <a class="remember" href="/forgot">Forgot Password ?</a>
-                    </div>
-
-                    <button>Login</button>
+                    <input placeholder="Course" class="input" type="text">
+                    <input placeholder="Password" class="input" type="text">
+                    <input placeholder="Confirm Password" class="input" type="password"></input>
+                    <button>Register</button>
                     <p>Dont have account ? <a href="/register">Register</a></p>
                 </form>
             </div>
