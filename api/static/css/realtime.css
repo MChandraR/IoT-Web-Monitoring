@@ -1,17 +1,25 @@
 body{
     padding : 0;
+    position: relative;
     margin : 0;
+    display: flex;
+    align-items: center;
     padding-top : 1rem;
     font-family: "Roboto", serif;
     /* background-color: #050522;; */
 }
 
+body::-webkit-scrollbar{
+    display: none;
+}
 
 .back{
+    position: absolute;
     color : white;
+    top : 1rem;
+    left : 1rem;
     font-weight: bold;
     text-decoration: none;
-    padding : 2rem 1rem;
 }
 
 .title{
@@ -20,20 +28,26 @@ body{
 }
 
 #date, #time{width: 50%;
-    margin : 1rem;
+    margin : .5rem;
     color : white;
 }
 
 #time{
+    border-right: solid rgba(255, 255, 255, 0.152) 2px;
+    padding-right : 1rem;
     font-size : 3rem;
     text-align: center;
+}
+
+#date{
+    font-size : 1.2rem;
 }
 
 .time-area{
     margin : 1rem;
     display: flex;
     align-items: center;
-    padding : 1rem;
+    padding : 2rem 1rem;
     border-radius : .5rem;
     background-color: rgba(255, 255, 255, 0.061);
 }
