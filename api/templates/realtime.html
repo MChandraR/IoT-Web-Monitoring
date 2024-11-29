@@ -12,36 +12,40 @@
         background-image: url("/static/images/background/6.jfif");
         background-repeat: no-repeat;
         background-size: cover;
+        height: 100vh;
+        overflow-x: hidden;
     }
 </style>
 <body>
-    <a class="back" href="/">Back</a>
-    <h1 class="title">Realtime Sensor</h1>
-    <div class="time-area">
-        <h2 id="time">Tanggal</h2>
-        <h2 id="date">Tanggal</h2>
-    </div>
-
-    <div class="data-area">
-        <div class="data-info">
-            <img src="/static/images/gif/thermometer-unscreen2.gif" alt="">
-            <h3 id="temp">30</h3>
+    <div>
+        <a class="back" href="/dashboard">Back</a>
+        <h1 class="title">Realtime Sensor</h1>
+        <div class="time-area">
+            <h2 id="time">00:00</h2>
+            <h2 id="date">Sun, 01 Jan 2024</h2>
         </div>
-        <div class="data-info">
-            <img src="/static/images/gif/humidity-unscreen2.gif" alt="">
-            <h3 id="hum">30</h3>
-        </div>
-        <div class="data-info">
-            <img src="/static/images/gif/wind-unscreen.gif" alt="">
-            <h3 id="wind">30</h3>
-        </div>
-        <div class="data-info">
-            <img src="/static/images/gif/gauge-unscreen.gif" alt="">
-            <h3 id="pressure">30</h3>
-        </div>
-        <div class="data-info battery">
-            <img src="/static/images/gif/energy-unscreen2.gif" alt="">
-            <h3 id="battery">30</h3>
+    
+        <div class="data-area">
+            <div class="data-info">
+                <img src="/static/images/gif/thermometer-unscreen2.gif" alt="">
+                <h3 id="temp">30</h3>
+            </div>
+            <div class="data-info">
+                <img src="/static/images/gif/humidity-unscreen2.gif" alt="">
+                <h3 id="hum">30</h3>
+            </div>
+            <div class="data-info">
+                <img src="/static/images/gif/wind-unscreen.gif" alt="">
+                <h3 id="wind">30</h3>
+            </div>
+            <div class="data-info">
+                <img src="/static/images/gif/gauge-unscreen.gif" alt="">
+                <h3 id="pressure">30</h3>
+            </div>
+            <div class="data-info battery">
+                <img src="/static/images/gif/energy-unscreen2.gif" alt="">
+                <h3 id="battery">30</h3>
+            </div>
         </div>
     </div>
 </body>
