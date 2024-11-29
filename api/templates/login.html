@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/static/font/roboto.css">
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+    <div>
+        <center>
+            <img class="logo" src="/static/images/logo.png" alt="" >
+            <div class="card">
+                <img id="close-btn" src="/static/images/icon/close.png" alt="">
+                <h5 class="welcome-back">Welcome Back!!!</h5>
+                <h1 class="login-text">Login</h1>
+                <form action="">
+                    <input placeholder="email" class="input" type="text">
+                    <input placeholder="password" class="input" type="password"></input>
+                    <div class="menu-area">
+                        <div class="check-area">
+                            <input type="checkbox" class="checkbox">Remember me</input>
+                        </div>
+                        <a class="remember" href="/forgot">Forgot Password ?</a>
+                    </div>
+                    <button>Login</button>
+                    <p>Dont have account ? <a href="/register">Register</a></p>
+                </form>
+            </div>
+        </center>
+    </div>
+</body>
+</html>
+<script>
+    let close_btn = document.getElementById("close-btn");
+    close_btn.addEventListener('click', (e)=>{
+        window.location.href = "/";
+    });
+</script>

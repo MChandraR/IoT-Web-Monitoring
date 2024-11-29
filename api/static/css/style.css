@@ -1,0 +1,53 @@
+body{
+    padding : 0;
+    margin : 0;
+    display : flex;
+    align-items: center;
+    height: 90vh;
+    font-family: 'Roboto', serif;
+    background-color: #050522;
+}
+
+.logo{
+    width : 80%;
+}
+
+.welcome{
+    font-weight: 400;
+    font-size : 2rem;
+    color :#EF5858;
+    margin-bottom : .5rem;
+}
+
+p{
+    color :white;
+    padding : 1rem;
+    line-height: 1.5rem;
+    margin-bottom : 3rem;
+}
+
+button{
+    border-radius: 1rem;
+    padding : 1rem;
+}
+
+.register{
+    width : 80%;
+    margin : 1rem 0;
+    color : #050522;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background-color: yellow;
+}
+
+.login{
+    width : 80%;
+    color : #FFDE69;
+    font-weight: bold;
+    font-size : 1.1rem;
+    background-color: #050522;
+    border: solid yellow 3px;
+}
+
+
+
