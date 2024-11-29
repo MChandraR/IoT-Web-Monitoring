@@ -1,0 +1,64 @@
+body{
+    padding : 0;
+    margin : 0;
+    padding-top : 1rem;
+    font-family: "Roboto", serif;
+    background-color: #050522;;
+}
+
+
+.back{
+    color : white;
+    font-weight: bold;
+    text-decoration: none;
+    padding : 2rem 1rem;
+}
+
+.title{
+    text-align : center;
+    color : white;
+}
+
+#date, #time{width: 50%;
+    margin : 1rem;
+    color : white;
+}
+
+#time{
+    font-size : 3rem;
+    text-align: center;
+}
+
+.time-area{
+    margin : 1rem;
+    display: flex;
+    align-items: center;
+    padding : 1rem;
+    border-radius : .5rem;
+    background-color: rgba(255, 255, 255, 0.157);
+}
+
+
+.data-area{
+    margin : 3rem 1rem;
+    column-gap: 2rem;
+    display : grid;
+    row-gap : 2rem;
+    grid-template-columns : calc(50vw - 2rem) calc(50vw - 2rem)
+}
+
+
+.data-area img{
+    width: 50%;
+}
+
+.data-info{
+    align-items: center;
+    display : flex;
+}
+
+.data-info h3{
+    color : white;
+    font-weight : bold;
+    font-size : 1.5rem;
+}
