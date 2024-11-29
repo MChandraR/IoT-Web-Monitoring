@@ -14,6 +14,7 @@ class Route:
         app.add_url_rule("/register", "register", self.register)
         app.add_url_rule("/dashboard", "dashboard", self.dashboard)
         app.add_url_rule("/data/realtime", "realtime", self.realtime)
+        app.add_url_rule("/data/history", "history", self.history)
         
         # self.firebase_credentials = {
         #     "type": os.getenv("FIREBASE_TYPE"),
@@ -48,4 +49,7 @@ class Route:
     
     def realtime(self):
         return render_template('realtime.html')
+    
+    def history(self):
+        return render_template('history.html')
     
