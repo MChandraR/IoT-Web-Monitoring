@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="/static/font/roboto.css">
     <link rel="stylesheet" href="/static/css/realtime.css">
 </head>
-</head>
+<style>
+    body{
+        background-image: url("/static/images/background/6.jfif");
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
 <body>
     <a class="back" href="/">Back</a>
     <h1 class="title">Realtime Sensor</h1>
@@ -33,7 +39,7 @@
             <img src="/static/images/gif/gauge-unscreen.gif" alt="">
             <h3 id="pressure">30</h3>
         </div>
-        <div class="data-info">
+        <div class="data-info battery">
             <img src="/static/images/gif/energy-unscreen2.gif" alt="">
             <h3 id="battery">30</h3>
         </div>
@@ -49,7 +55,7 @@
     function updateTime(){
         let date = new Date();
         dates.innerHTML = (`${hari[date.getDay()]}, ${date.getDate()} ${bulan[date.getMonth()]} ${date.getFullYear()}`);
-        time.innerHTML = (`${date.getHours()}:${date.getMinutes()}`);
+        time.innerHTML = (`${('00'+date.getHours()).slice(-2)}:${('00'+date.getMinutes()).slice(-2)}`);
     }
     updateTime();
     setInterval(updateTime, 1000);
@@ -65,7 +71,7 @@
         hum.innerHTML = 50 + parseInt(Math.random()*40) + "%";
         wind.innerHTML = parseInt(Math.random()*20) + " knot";
         pressure.innerHTML = parseInt(Math.random()*20) + " Pa";
-        battery.innerHTML = "75%";
+        battery.innerHTML = "12.5V";
     }
     randData();
     setInterval(randData, 1000);
