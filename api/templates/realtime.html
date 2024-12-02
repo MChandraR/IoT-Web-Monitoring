@@ -24,6 +24,12 @@
             <h2 id="time">00:00</h2>
             <h2 id="date">Sun, 01 Jan 2024</h2>
         </div>
+
+        <center>
+            <br>
+            <h2  id="kondisi" style="color : white; margin-bottom : 0;">Kondisi Cuaca</h2>
+            <!-- <hr> -->
+        </center>
     
         <div class="data-area">
             <div class="data-info">
@@ -68,6 +74,7 @@
     let hum = document.getElementById('hum');
     let wind = document.getElementById('wind');
     let battery = document.getElementById('battery');
+    let kondisi = document.getElementById('kondisi');
     let pressure = document.getElementById('pressure');
 
     async function randData(){
@@ -79,9 +86,10 @@
 
         temp.innerHTML = data.suhu+ "°C";
         hum.innerHTML = data.kelembaban + "%";
-        wind.innerHTML = data.windspeed + " knot";
+        wind.innerHTML = data.windspeed + " m/s";
         pressure.innerHTML = data.tekanan + " Pa";
         battery.innerHTML =  data.tegangan+"V";
+        kondisi.innerHTML =  `- ${data.kondisi_cuaca} -`;
     }
     randData();
     setInterval(randData, 1000);
