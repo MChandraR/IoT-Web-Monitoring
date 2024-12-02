@@ -13,7 +13,8 @@ class Route:
         app.add_url_rule("/dashboard", "dashboard", self.dashboard)
         app.add_url_rule("/data/realtime", "realtime", self.realtime)
         app.add_url_rule("/data/history", "history", self.history)
-        app.add_url_rule("/data", "data", self.fetchData)
+        app.add_url_rule("/realtime", "data", self.fetchData)
+        app.add_url_rule("/dump", "dump", self.dumpData)
         
         self.firebase_credentials = {
             "type": os.getenv("FIREBASE_TYPE"),
@@ -55,7 +56,16 @@ class Route:
     def fetchData(self):
         try:
         # Referensi ke root database atau node tertentu
-            ref = db.reference('/')  # Bisa disesuaikan dengan path data
+            ref = db.reference('/realtime')  # Bisa disesuaikan dengan path data
+            data = ref.get()  # Mendapatkan semua data
+            return jsonify({"success": True, "data": data}), 200
+        except Exception as e:
+            return jsonify({"success": False, "error": str(e)}), 500
+        
+    def dumpData(self):
+        try:
+        # Referensi ke root database atau node tertentu
+            ref = db.reference('/data')  # Bisa disesuaikan dengan path data
             data = ref.get()  # Mendapatkan semua data
             return jsonify({"success": True, "data": data}), 200
         except Exception as e:

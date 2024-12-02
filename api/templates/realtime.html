@@ -78,12 +78,11 @@
     let pressure = document.getElementById('pressure');
 
     async function randData(){
-        let data = await fetch('/data');
+        let data = await fetch('/realtime');
 
         let res = await data.json();
-        data = res.data[0];
+        data = res.data;
         console.log(data);
-
         temp.innerHTML = data.suhu+ "°C";
         hum.innerHTML = data.kelembaban + "%";
         wind.innerHTML = data.windspeed + " m/s";
