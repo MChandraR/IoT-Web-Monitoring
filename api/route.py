@@ -56,7 +56,7 @@ class Route:
     def fetchData(self):
         try:
         # Referensi ke root database atau node tertentu
-            ref = db.reference('/realtime')  # Bisa disesuaikan dengan path data
+            ref = db.reference('/data/realtime')  # Bisa disesuaikan dengan path data
             data = ref.get()  # Mendapatkan semua data
             return jsonify({"success": True, "data": data}), 200
         except Exception as e:
@@ -65,7 +65,7 @@ class Route:
     def dumpData(self):
         try:
         # Referensi ke root database atau node tertentu
-            ref = db.reference('/data')  # Bisa disesuaikan dengan path data
+            ref = db.reference('/data/data')  # Bisa disesuaikan dengan path data
             data = ref.get()  # Mendapatkan semua data
             return jsonify({"success": True, "data": data}), 200
         except Exception as e:

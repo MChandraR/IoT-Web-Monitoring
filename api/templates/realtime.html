@@ -16,6 +16,7 @@
         overflow-x: hidden;
     }
 </style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body>
     <div>
         <a class="back" href="/dashboard">Back</a>
@@ -28,6 +29,7 @@
         <center>
             <br>
             <h2  id="kondisi" style="color : white; margin-bottom : 0;">Kondisi Cuaca</h2>
+            <span style="color : rgba(255, 255, 255, 0.527); margin-top : 1rem; font-size : .75rem;">Terakhir diubah : <span id="last-update"></span></span>
             <!-- <hr> -->
         </center>
     
@@ -54,16 +56,21 @@
             </div>
         </div>
     </div>
+
+    
 </body>
 </html>
 
 <script>
     let dates = document.getElementById('date');
+    let canvas = document.getElementById('realtime-canvas');
     let time = document.getElementById('time');
     let bulan = ["Januari", "Februari", "Maret", "Arpil", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
     let hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
+    let date = "";
+
     function updateTime(){
-        let date = new Date();
+        date = new Date();
         dates.innerHTML = (`${hari[date.getDay()]}, ${date.getDate()} ${bulan[date.getMonth()]} ${date.getFullYear()}`);
         time.innerHTML = (`${('00'+date.getHours()).slice(-2)}:${('00'+date.getMinutes()).slice(-2)}`);
     }
@@ -76,21 +83,62 @@
     let battery = document.getElementById('battery');
     let kondisi = document.getElementById('kondisi');
     let pressure = document.getElementById('pressure');
+    let lastUpdate = document.getElementById('last-update');
 
-    async function randData(){
+    let myChart = new Chart(canvas, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Data Suhu',
+            data: [],
+            borderWidth: 1
+          },
+          {
+            label: 'Data Kelembapan',
+            data: [],
+            borderWidth: 1
+          }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+               
+            }
+          },
+          elements : {
+            point :{
+                pointStyle : false
+            }
+          }
+        }
+      });
+
+    let counter = 0;
+    async function updateData(){
         let data = await fetch('/realtime');
 
         let res = await data.json();
         data = res.data;
         console.log(data);
-        temp.innerHTML = data.suhu+ "°C";
+        temp.innerHTML = data.suhu+ "°c";
         hum.innerHTML = data.kelembaban + "%";
         wind.innerHTML = data.windspeed + " m/s";
-        pressure.innerHTML = data.tekanan + " Pa";
+        pressure.innerHTML = parseInt(data.tekanan) + " hPa";
         battery.innerHTML =  data.tegangan+"V";
-        kondisi.innerHTML =  `- ${data.kondisi_cuaca} -`;
+        kondisi.innerHTML =  `∙ ${data.kondisiCuaca} ∙`;
+        let sameDay = data.tanggal == `${('0000'+date.getFullYear()).slice(-4)}-${('00'+(date.getMonth()+1)).slice(-2)}-${('00'+date.getDate()).slice(-2)}`;
+        let baruSaja = 
+        lastUpdate.innerHTML = `${sameDay? "" : data.tanggal} ${data.waktu}`;
+        myChart.data.datasets.forEach((e, idx)=>{
+            myChart.data.labels.push(++counter);
+            if(!idx)e.data.push(data.suhu);
+            else if(idx==1) e.data.push(data.kelembaban);
+        });
+        myChart.update();
     }
-    randData();
-    setInterval(randData, 1000);
+    updateData();
+    setInterval(updateData, 1000);
 
 </script>

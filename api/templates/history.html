@@ -10,11 +10,11 @@
 <body>
     <a class="back" href="/dashboard">Back</a><br><br>
     <h1 class="title">Riwayat Data Sensor</h1>
-    <center>
+    <!-- <center>
     <div style="width : 80vw;">
         <canvas id="chart" style="width : 50vw;"></canvas>
     </div>
-    </center>
+    </center> -->
 
     <div style="display : grid; grid-template-columns : 100% ; column-gap : 5rem; row-gap:5rem; margin : 5rem 2rem;">
         <div >
@@ -24,6 +24,11 @@
         <div >
             <canvas id="chartSuhu" style="width : 50vw;"></canvas>
         </div>
+
+        <div >
+            <canvas id="chartKelembapan" style="width : 50vw;"></canvas>
+        </div>
+
 
         <div >
             <canvas id="chartTegangan" style="width : 50vw;"></canvas>
@@ -36,153 +41,6 @@
     
 </body>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="/static/js/history.js"></script>
 
 </html>
-<script>
-    const ctx = document.getElementById('chart');
-    const chartTekanan = document.getElementById('chartTekanan');
-    const chartSuhu= document.getElementById('chartSuhu');
-    const chartTegangan= document.getElementById('chartTegangan');
-    const chartKecepatan= document.getElementById('chartKecepatan');
-
-    async function fetchData(){
-        let data = await fetch('/dump');
-
-        let res = await data.json();
-        res = res.data;
-        let datas = [];
-        let suhu = [];
-        let kelembaban = [];
-        let tegangan = [];
-        let tekanan  = [];
-        let labels = [];
-        let idx = 0;
-        for(let key in res){
-            datas.push(res[key].windspeed);
-            suhu.push(res[key].suhu);
-            tekanan.push(res[key].tekanan);
-            tegangan.push(res[key].tegangan);
-            kelembaban.push(res[key].kelembaban);
-            labels.push(idx);
-            idx++;
-        }
-        console.log(res);
-        new Chart(ctx, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Kecepatan Angin',
-                data: datas,
-                borderWidth: 1
-              },
-              {
-                label: 'Data suhu',
-                data: suhu,
-                borderWidth: 1
-              },
-              {
-                label: 'Data Kelembaban',
-                data: kelembaban,
-                borderWidth: 1
-              },
-              {
-                label: 'Data Tegangan',
-                data: tegangan,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                  beginAtZero: true
-                }
-              }
-            }
-          });
-
-
-          new Chart(chartTekanan, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Tekanan Udara',
-                data: tekanan,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                    suggestedMin: Math.min(tekanan),
-                    suggestedMax: Math.max(tekanan)
-                }
-              }
-            }
-          });
-
-          new Chart(chartSuhu, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Suhu Udara',
-                data: suhu,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                    suggestedMin: Math.min(suhu),
-                    suggestedMax: Math.max(suhu)
-                }
-              }
-            }
-          });
-
-          new Chart(chartTegangan, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Tegangan',
-                data: tegangan,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                    suggestedMin: Math.min(tegangan),
-                    suggestedMax: Math.max(tegangan)
-                }
-              }
-            }
-          });
-
-          new Chart(chartKecepatan, {
-            type: 'line',
-            data: {
-              labels: labels,
-              datasets: [{
-                label: 'Kecepatan Udara',
-                data: datas,
-                borderWidth: 1
-              }]
-            },
-            options: {
-              scales: {
-                y: {
-                    suggestedMin: Math.min(datas),
-                    suggestedMax: Math.max(datas)
-                }
-              }
-            }
-          });
-    }
-
-    fetchData();
-
-</script>
