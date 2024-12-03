@@ -18,53 +18,77 @@
 </style>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <body>
-    <div>
-        <a class="back" href="/dashboard">Back</a>
-        <h1 class="title">Realtime Sensor</h1>
-        <div class="time-area">
-            <h2 id="time">00:00</h2>
-            <h2 id="date">Sun, 01 Jan 2024</h2>
+    <div class="body">
+        <div>
+            <a class="back" href="/dashboard">Back</a>
+            <h1 class="title">Realtime Sensor</h1>
+            <div class="time-area">
+                <h2 id="time">00:00</h2>
+                <h2 id="date">Sun, 01 Jan 2024</h2>
+            </div>
+
+            <center>
+                <br>
+                <h2  id="kondisi" style="color : white; margin-bottom : 0;">Kondisi Cuaca</h2>
+                <span style="color : rgba(255, 255, 255, 0.527); margin-top : 1rem; font-size : .75rem;">Terakhir diubah : <span id="last-update"></span></span>
+                <!-- <hr> -->
+            </center>
+        
+            <div class="data-area">
+                <div class="data-info">
+                    <img src="/static/images/gif/thermometer-unscreen2.gif" alt="">
+                    <h3 id="temp">30</h3>
+                </div>
+                <div class="data-info">
+                    <img src="/static/images/gif/humidity-unscreen2.gif" alt="">
+                    <h3 id="hum">30</h3>
+                </div>
+                <div class="data-info">
+                    <img src="/static/images/gif/wind-unscreen.gif" alt="">
+                    <h3 id="wind">30</h3>
+                </div>
+                <div class="data-info">
+                    <img src="/static/images/gif/gauge-unscreen.gif" alt="">
+                    <h3 id="pressure">30</h3>
+                </div>
+                <div class="data-info battery">
+                    <img src="/static/images/gif/energy-unscreen2.gif" alt="">
+                    <h3 id="battery">30</h3>
+                </div>
+            </div>
         </div>
 
-        <center>
-            <br>
-            <h2  id="kondisi" style="color : white; margin-bottom : 0;">Kondisi Cuaca</h2>
-            <span style="color : rgba(255, 255, 255, 0.527); margin-top : 1rem; font-size : .75rem;">Terakhir diubah : <span id="last-update"></span></span>
-            <!-- <hr> -->
-        </center>
-    
-        <div class="data-area">
-            <div class="data-info">
-                <img src="/static/images/gif/thermometer-unscreen2.gif" alt="">
-                <h3 id="temp">30</h3>
+        <div class="chart-area">
+            <div class="header">
+                <h2>Grafik Realtime</h2>
+                <hr>
             </div>
-            <div class="data-info">
-                <img src="/static/images/gif/humidity-unscreen2.gif" alt="">
-                <h3 id="hum">30</h3>
+            <div>
+                <canvas  id="realtime-suhu"></canvas>
             </div>
-            <div class="data-info">
-                <img src="/static/images/gif/wind-unscreen.gif" alt="">
-                <h3 id="wind">30</h3>
+            <div>
+                <canvas  id="realtime-tegangan"></canvas>
             </div>
-            <div class="data-info">
-                <img src="/static/images/gif/gauge-unscreen.gif" alt="">
-                <h3 id="pressure">30</h3>
+            <div>
+                <canvas  id="realtime-angin"></canvas>
             </div>
-            <div class="data-info battery">
-                <img src="/static/images/gif/energy-unscreen2.gif" alt="">
-                <h3 id="battery">30</h3>
+            <div>
+                <canvas  id="realtime-tekanan"></canvas>
             </div>
         </div>
+
     </div>
 
-    <canvas style="display : none;" id="realtime-canvas"></canvas>
     
 </body>
 </html>
 
 <script>
     let dates = document.getElementById('date');
-    let canvas = document.getElementById('realtime-canvas');
+    let suhuCanvas = document.getElementById('realtime-suhu');
+    let teganganCanvas = document.getElementById('realtime-tegangan');
+    let anginCanvas = document.getElementById('realtime-angin');
+    let tekananCanvas = document.getElementById('realtime-tekanan');
     let time = document.getElementById('time');
     let bulan = ["Januari", "Februari", "Maret", "Arpil", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
     let hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -86,7 +110,7 @@
     let pressure = document.getElementById('pressure');
     let lastUpdate = document.getElementById('last-update');
 
-    let myChart = new Chart(canvas, {
+    let myChart = new Chart(suhuCanvas, {
         type: 'line',
         data: {
           labels: [],
@@ -112,6 +136,111 @@
             point :{
                 pointStyle : false
             }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+          }
+        }
+      });
+    let teganganChart = new Chart(teganganCanvas, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Data Tegangan',
+            data: [],
+            borderWidth: 1
+          }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+               
+            }
+          },
+          elements : {
+            point :{
+                pointStyle : false
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+          }
+        }
+      });
+    let anginChart = new Chart(anginCanvas, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Data Kec.Angin',
+            data: [],
+            borderWidth: 1
+          }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+               
+            }
+          },
+          elements : {
+            point :{
+                pointStyle : false
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
+          }
+        }
+      });
+
+      let tekananChart = new Chart(tekananCanvas, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [{
+            label: 'Data Kec.Angin',
+            data: [],
+            borderWidth: 1
+          }
+          ]
+        },
+        options: {
+          scales: {
+            y: {
+               
+            }
+          },
+          elements : {
+            point :{
+                pointStyle : false
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            }
           }
         }
       });
@@ -132,12 +261,35 @@
         let sameDay = data.tanggal == `${('0000'+date.getFullYear()).slice(-4)}-${('00'+(date.getMonth()+1)).slice(-2)}-${('00'+date.getDate()).slice(-2)}`;
         let baruSaja = 
         lastUpdate.innerHTML = `${sameDay? "" : data.tanggal} ${data.waktu}`;
+        
+        myChart.data.labels.push(counter);
+        teganganChart.data.labels.push(counter);
+        anginChart.data.labels.push(counter);
+        tekananChart.data.labels.push(counter);
+
         myChart.data.datasets.forEach((e, idx)=>{
-            myChart.data.labels.push(++counter);
             if(!idx)e.data.push(data.suhu);
             else if(idx==1) e.data.push(data.kelembaban);
         });
+        
+        teganganChart.data.datasets.forEach((e, idx)=>{
+            e.data.push(data.tegangan);
+        });
+
+        anginChart.data.datasets.forEach((e, idx)=>{
+            e.data.push(data.windspeed);
+        });
+
+        tekananChart.data.datasets.forEach((e, idx)=>{
+            e.data.push(data.tekanan);
+        });
+
+
         myChart.update();
+        teganganChart.update();
+        anginChart.update();
+        tekananChart.update();
+        counter++;
     }
     updateData();
     setInterval(updateData, 1000);

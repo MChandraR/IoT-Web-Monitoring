@@ -8,6 +8,13 @@ body{
     background-color: #050522;;
 }
 
+.body{
+    display: grid;
+    grid-template-columns: calc(50% - 2rem) calc(50% - 2rem);
+    align-items: start;
+    column-gap: 2rem;
+}
+
 body::-webkit-scrollbar{
     display: none;
 }
@@ -57,7 +64,7 @@ body::-webkit-scrollbar{
     column-gap: 2rem;
     display : grid;
     row-gap : 2rem;
-    grid-template-columns : calc(50vw - 2rem) calc(50vw - 2rem)
+    grid-template-columns : repeat(3 , calc(33% - 2rem))
 }
 
 
@@ -78,7 +85,7 @@ body::-webkit-scrollbar{
 
 .battery{
     position: relative;
-    justify-content: center;
+    justify-content: start;
     display: flex;
     grid-column: span 2;
 }
@@ -88,6 +95,115 @@ body::-webkit-scrollbar{
 }
 
 .battery h3{
-    text-shadow: 0 0 .5rem blue;
-    position: absolute;
+    margin-left: -1rem;
+}
+
+.chart-area{
+    display: grid;
+    column-gap: 2rem;
+    row-gap: 2rem;
+    grid-template-columns: repeat(2, calc(50% - 1rem));
+}
+
+.chart-area .header{
+    text-align: center;
+    color : white;
+    grid-column: span 2;
+}
+
+.header hr{
+    border: solid rgba(255, 255, 255, 0.102) 1px;
+    background-color: rgba(255, 255, 255, 0.193);
+}
+
+
+@media only screen and (max-width : 900px) {
+    .body{
+        display: inline;
+    }
+
+    .back{
+        position: absolute;
+        color : white;
+        top : 1rem;
+        left : 1rem;
+        font-weight: bold;
+        text-decoration: none;
+    }
+
+    .title{
+        text-align : center;
+        color : white;
+    }
+
+    #date, #time{width: 50%;
+        margin : .5rem;
+        color : white;
+    }
+
+    #time{
+        border-right: solid rgba(255, 255, 255, 0.152) 2px;
+        padding-right : 1rem;
+        font-size : 3rem;
+        text-align: center;
+    }
+
+    #date{
+        font-size : 1.2rem;
+    }
+
+    .time-area{
+        margin : 1rem;
+        display: flex;
+        align-items: center;
+        padding : 2rem 1rem;
+        border-radius : .5rem;
+        background-color: rgba(255, 255, 255, 0.061);
+    }
+
+
+    .data-area{
+        margin : 3rem 1rem;
+        column-gap: 2rem;
+        display : grid;
+        row-gap : 2rem;
+        grid-template-columns : calc(50vw - 2rem) calc(50vw - 2rem)
+    }
+
+
+    .data-area img{
+        width: 50%;
+    }
+
+    .data-info{
+        align-items: center;
+        display : flex;
+    }
+
+    .data-info h3{
+        color : white;
+        font-weight : bold;
+        font-size : 1.5rem;
+    }
+
+    .battery{
+        position: relative;
+        justify-content: center;
+        display: flex;
+        grid-column: span 2;
+    }   
+
+    .battery img{
+        width: 35%;
+    }
+
+    .battery h3{
+        text-shadow: 0 0 .5rem blue;
+        position: absolute;
+        margin-left : 0;
+    }      
+    
+    .chart-area{
+        display : none;
+    }
 }
