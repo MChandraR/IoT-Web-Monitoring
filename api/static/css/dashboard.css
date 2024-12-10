@@ -20,18 +20,19 @@ body{
 }
 
 .menu{
-    display : grid;
+    display : flex;
     column-gap : 2rem;
     row-gap : 2rem;
     margin : 3rem 1rem;
-    grid-template-columns : calc(50% - 1rem) calc(50% - 1rem);
+    justify-content: center;
 }
 
 .card{
     background-color: rgba(255, 255, 255, 0.234);
     border-radius : .5rem;
     padding : 1rem;
-    height: calc(50vw - 4rem);
+    height: calc(18vw - 4rem);
+    width: 15vw;
     text-decoration: none;
     color : black
 }
@@ -46,4 +47,57 @@ body{
     text-align : center;
     margin : .5rem;
     color: white;
+}
+
+.sponsor{
+    position: absolute;
+    bottom : 0;
+    width: 100%;
+    column-gap: 1rem;
+    display : flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.sponsor img{
+    width : 7rem;
+}
+
+.sponsor .umrah{
+    width : 4rem;
+    height: 4rem;
+}
+
+@media only screen and (max-width : 900px) {
+
+    .menu{
+        display : grid;
+        column-gap : 2rem;
+        row-gap : 2rem;
+        margin : 3rem 1rem;
+        grid-template-columns : calc(50% - 1rem) calc(50% - 1rem);
+    }
+
+    .card{
+        background-color: rgba(255, 255, 255, 0.234);
+        border-radius : .5rem;
+        padding : 1rem;
+        width:auto;
+        height: calc(50vw - 4rem);
+        text-decoration: none;
+        color : black
+    }
+
+    .card img{
+        width : 75%;
+        height: 75%;
+        object-fit: contain;
+    }
+    
+    .card h4{
+        text-align : center;
+        margin : .5rem;
+        color: white;
+    }
+    
 }

@@ -77,10 +77,10 @@ body::-webkit-scrollbar{
     display : flex;
 }
 
-.data-info h3{
+.data-info div h3{
     color : white;
     font-weight : bold;
-    font-size : 1.5rem;
+    font-size : 1.2rem;
 }
 
 .battery{
@@ -94,8 +94,21 @@ body::-webkit-scrollbar{
     width: 35%;
 }
 
+
+
 .battery h3{
+    font-size: 1.2rem;
     margin-left: -1rem;
+    text-align: left;
+    color : white;
+}
+
+.battery div{
+    transform: translateX(-2rem);
+}
+
+.battery h3{
+    margin : -1rem 0;
 }
 
 .chart-area{
@@ -114,6 +127,10 @@ body::-webkit-scrollbar{
 .header hr{
     border: solid rgba(255, 255, 255, 0.102) 1px;
     background-color: rgba(255, 255, 255, 0.193);
+}
+
+.legend-list{
+    display : flex;
 }
 
 
@@ -197,11 +214,26 @@ body::-webkit-scrollbar{
         width: 35%;
     }
 
-    .battery h3{
+    .battery div h3{
         text-shadow: 0 0 .5rem blue;
         position: absolute;
         margin-left : 0;
-    }      
+        font-size: 1.2rem;
+        text-align: center;
+    }    
+    
+    .tegangan-title{
+        transform: translateY(-1.5rem);
+    }
+    
+    .battery div{
+        position : absolute;
+        transform: translateX(-2.5rem);
+    }
+    
+    .battery div h3{
+        text-align : center;
+    }
     
     .chart-area{
         display : none;

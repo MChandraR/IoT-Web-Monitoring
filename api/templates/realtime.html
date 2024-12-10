@@ -37,23 +37,41 @@
             <div class="data-area">
                 <div class="data-info">
                     <img src="/static/images/gif/thermometer-unscreen2.gif" alt="">
-                    <h3 id="temp">30</h3>
+                    <div>
+                      <h3 style="margin: 0;">Suhu</h3>
+                      <h3 style="margin: 0;" id="temp">30</h3>
+                    </div>
                 </div>
                 <div class="data-info">
                     <img src="/static/images/gif/humidity-unscreen2.gif" alt="">
-                    <h3 id="hum">30</h3>
+                    <div>
+                      <h3 style="margin: 0;">Kelembapan</h3>
+                      <h3 style="margin: 0;" id="hum">30</h3>
+                    </div>
                 </div>
                 <div class="data-info">
                     <img src="/static/images/gif/wind-unscreen.gif" alt="">
-                    <h3 id="wind">30</h3>
+                    <div>
+                      <h3 style="margin: 0;">Kec.Angin</h3>
+                      <h3 style="margin: 0;" id="wind">30</h3>
+                    </div>
                 </div>
                 <div class="data-info">
                     <img src="/static/images/gif/gauge-unscreen.gif" alt="">
-                    <h3 id="pressure">30</h3>
+                    <div>
+                      <h3 style="margin: 0;">Tekanan</h3>
+                      <h3 style="margin: 0;" id="pressure">30</h3>
+                    </div>
                 </div>
                 <div class="data-info battery">
                     <img src="/static/images/gif/energy-unscreen2.gif" alt="">
-                    <h3 id="battery">30</h3>
+                    <div>
+                      <center>  
+                        <h3 style = "margin:0; " class="tegangan-title" >Tegangan</h3>  
+                        <h3 style = "margin:0;" id="battery">30</h3>
+                      </center>
+                    </div>
+                    
                 </div>
             </div>
         </div>
@@ -62,10 +80,17 @@
             <div class="header">
                 <h2>Grafik Realtime</h2>
                 <hr>
+
+  
             </div>
+            
             <div>
                 <canvas  id="realtime-suhu"></canvas>
             </div>
+
+            <div>
+              <canvas  id="realtime-kelembapan"></canvas>
+          </div>
             <div>
                 <canvas  id="realtime-tegangan"></canvas>
             </div>
@@ -89,6 +114,7 @@
     let teganganCanvas = document.getElementById('realtime-tegangan');
     let anginCanvas = document.getElementById('realtime-angin');
     let tekananCanvas = document.getElementById('realtime-tekanan');
+    let kelembapanCanvas = document.getElementById('realtime-kelembapan');
     let time = document.getElementById('time');
     let bulan = ["Januari", "Februari", "Maret", "Arpil", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"]
     let hari = ["Minggu", "Senin", "Selasa", "Rabu", "Kamis", "Jumat", "Sabtu"]
@@ -117,12 +143,9 @@
           datasets: [{
             label: 'Data Suhu',
             data: [],
-            borderWidth: 1
-          },
-          {
-            label: 'Data Kelembapan',
-            data: [],
-            borderWidth: 1
+            borderWidth: 1,
+            borderColor: '#a81d02',
+            backgroundColor: '#a81d02',
           }
           ]
         },
@@ -143,10 +166,65 @@
                 labels: {
                     color: 'rgb(255, 99, 132)'
                 }
+            },
+            title: {
+              display: true,
+              text: 'Data Suhu',
+              color : "#ffff",
+              align : "center",
+              fullSize : true,
+              padding : {
+                left : 2000
+              }
             }
           }
         }
       });
+
+      let kelembapanChart = new Chart(kelembapanCanvas, {
+        type: 'line',
+        data: {
+          labels: [],
+          datasets: [
+          {
+            label: 'Data Kelembapan',
+            data: [],
+            borderWidth: 1,
+          }]
+        },
+        options: {
+          scales: {
+            y: {
+               
+            }
+          },
+          elements : {
+            point :{
+                pointStyle : false
+            }
+          },
+          plugins: {
+            legend: {
+                display: false,
+                labels: {
+                    color: 'rgb(255, 99, 132)'
+                }
+            },
+            title: {
+              display: true,
+              text: 'Data Kelembapan',
+              color : "#ffff",
+              align : "center",
+              fullSize : true,
+              padding : {
+                left : 2000
+              }
+            }
+          }
+        }
+      });
+
+
     let teganganChart = new Chart(teganganCanvas, {
         type: 'line',
         data: {
@@ -154,7 +232,9 @@
           datasets: [{
             label: 'Data Tegangan',
             data: [],
-            borderWidth: 1
+            borderWidth: 1,
+            borderColor: '#ffe600',
+            backgroundColor: '#ffe600',
           }
           ]
         },
@@ -175,6 +255,16 @@
                 labels: {
                     color: 'rgb(255, 99, 132)'
                 }
+            },
+            title: {
+              display: true,
+              text: 'Data Tegangan',
+              color : "#ffff",
+              align : "center",
+              fullSize : true,
+              padding : {
+                left : 2000
+              }
             }
           }
         }
@@ -186,7 +276,10 @@
           datasets: [{
             label: 'Data Kec.Angin',
             data: [],
-            borderWidth: 1
+            borderWidth: 1,
+            
+            borderColor: '#ffff',
+            backgroundColor: '#ffff',
           }
           ]
         },
@@ -207,6 +300,16 @@
                 labels: {
                     color: 'rgb(255, 99, 132)'
                 }
+            },
+            title: {
+              display: true,
+              text: 'Data Kecepatan Angin',
+              color : "#ffff",
+              align : "center",
+              fullSize : true,
+              padding : {
+                left : 2000
+              }
             }
           }
         }
@@ -219,7 +322,10 @@
           datasets: [{
             label: 'Data Kec.Angin',
             data: [],
-            borderWidth: 1
+            borderWidth: 1,
+            
+            borderColor: '#0cb300',
+            backgroundColor: '#0cb300',
           }
           ]
         },
@@ -240,6 +346,16 @@
                 labels: {
                     color: 'rgb(255, 99, 132)'
                 }
+            },
+            title: {
+              display: true,
+              text: 'Data Tekanan Udara',
+              color : "#ffff",
+              align : "center",
+              fullSize : true,
+              padding : {
+                left : 2000
+              }
             }
           }
         }
@@ -266,10 +382,15 @@
         teganganChart.data.labels.push(counter);
         anginChart.data.labels.push(counter);
         tekananChart.data.labels.push(counter);
+        kelembapanChart.data.labels.push(counter);
 
         myChart.data.datasets.forEach((e, idx)=>{
             if(!idx)e.data.push(data.suhu);
             else if(idx==1) e.data.push(data.kelembaban);
+        });
+
+        kelembapanChart.data.datasets.forEach((e, idx)=>{
+          e.data.push(data.kelembaban);
         });
         
         teganganChart.data.datasets.forEach((e, idx)=>{
@@ -289,6 +410,7 @@
         teganganChart.update();
         anginChart.update();
         tekananChart.update();
+        kelembapanChart.update();
         counter++;
     }
     updateData();
