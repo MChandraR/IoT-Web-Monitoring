@@ -15,6 +15,7 @@ class Route:
         app.add_url_rule("/data/history", "history", self.history)
         app.add_url_rule("/realtime", "data", self.fetchData)
         app.add_url_rule("/dump", "dump", self.dumpData)
+        app.add_url_rule("/about", "about", self.about)
         
         self.firebase_credentials = {
             "type": os.getenv("FIREBASE_TYPE"),
@@ -52,6 +53,9 @@ class Route:
     
     def history(self):
         return render_template('history.html')
+    
+    def about(self):
+        return render_template('about.html')
 
     def fetchData(self):
         try:
