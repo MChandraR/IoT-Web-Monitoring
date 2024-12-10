@@ -197,10 +197,10 @@ body::-webkit-scrollbar{
         display : flex;
     }
 
-    .data-info h3{
+    .data-info div h3{
         color : white;
         font-weight : bold;
-        font-size : 1.5rem;
+        font-size : 1rem;
     }
 
     .battery{
@@ -218,7 +218,7 @@ body::-webkit-scrollbar{
         text-shadow: 0 0 .5rem blue;
         position: absolute;
         margin-left : 0;
-        font-size: 1.2rem;
+        font-size: 1rem;
         text-align: center;
     }    
     
@@ -228,11 +228,12 @@ body::-webkit-scrollbar{
     
     .battery div{
         position : absolute;
-        transform: translateX(-2.5rem);
+        transform: translateX(-1.5rem);
     }
     
     .battery div h3{
         text-align : center;
+        font-size: 1rem;
     }
     
     .chart-area{
