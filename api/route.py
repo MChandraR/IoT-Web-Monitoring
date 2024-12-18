@@ -4,8 +4,8 @@ from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials, db
 load_dotenv()
-import pandas as pd
 from io import BytesIO
+from openpyxl import Workbook
 class Route:
     def __init__(self, app):
         app.add_url_rule("/", "home", self.home)
@@ -87,17 +87,27 @@ class Route:
             
             if not data:
                 return jsonify({"success": False, "error": "No data found"}), 404
-            
-            # Convert data dictionary to a DataFrame
-            df = pd.DataFrame.from_dict(data, orient='index')
-            
-            # Create an in-memory buffer to hold the Excel file
-            output = BytesIO()
-            with pd.ExcelWriter(output, engine='openpyxl') as writer:
-                df.to_excel(writer, index=True, sheet_name='Data')
-            output.seek(0)  # Reset buffer pointer to the beginning
 
-            # Create a Flask response with the Excel file
+            # Membuat workbook baru
+            wb = Workbook()
+            ws = wb.active
+            ws.title = "Data"
+
+            # Menambahkan header
+            headers = ["Key"] + list(next(iter(data.values())).keys())
+            ws.append(headers)
+
+            # Menambahkan data
+            for key, value in data.items():
+                row = [key] + list(value.values())
+                ws.append(row)
+
+            # Menyimpan workbook ke buffer
+            output = BytesIO()
+            wb.save(output)
+            output.seek(0)
+
+            # Membuat respons Flask dengan file Excel
             response = make_response(output.getvalue())
             response.headers['Content-Disposition'] = 'attachment; filename=data.xlsx'
             response.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
