@@ -14,3 +14,5 @@ https://www.flaticon.com/free-icon/temperature-control_13300502?term=sensor&page
 <a href="https://www.flaticon.com/free-icons/settings" title="settings icons">Settings icons created by Freepik - Flaticon</a>
 
 <a href="https://www.flaticon.com/free-icons/about" title="about icons">About icons created by Freepik - Flaticon</a>
+
+<a href="https://www.flaticon.com/free-icons/installer" title="installer icons">Installer icons created by Fantasyou - Flaticon</a>

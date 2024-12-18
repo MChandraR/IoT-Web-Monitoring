@@ -1,10 +1,11 @@
-from flask import render_template, jsonify
+from flask import render_template, jsonify, make_response
 import os 
 from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials, db
 load_dotenv()
-
+import pandas as pd
+from io import BytesIO
 class Route:
     def __init__(self, app):
         app.add_url_rule("/", "home", self.home)
@@ -16,6 +17,7 @@ class Route:
         app.add_url_rule("/realtime", "data", self.fetchData)
         app.add_url_rule("/dump", "dump", self.dumpData)
         app.add_url_rule("/about", "about", self.about)
+        app.add_url_rule("/export", "export", self.exportData)
         
         self.firebase_credentials = {
             "type": os.getenv("FIREBASE_TYPE"),
@@ -72,6 +74,35 @@ class Route:
             ref = db.reference('/data/data')  # Bisa disesuaikan dengan path data
             data = ref.get()  # Mendapatkan semua data
             return jsonify({"success": True, "data": data}), 200
+        except Exception as e:
+            return jsonify({"success": False, "error": str(e)}), 500
+        
+
+
+    def exportData(self):
+        try:
+            # Referensi ke root database atau node tertentu
+            ref = db.reference('/data/data')  # Bisa disesuaikan dengan path data
+            data = ref.get()  # Mendapatkan semua data
+            
+            if not data:
+                return jsonify({"success": False, "error": "No data found"}), 404
+            
+            # Convert data dictionary to a DataFrame
+            df = pd.DataFrame.from_dict(data, orient='index')
+            
+            # Create an in-memory buffer to hold the Excel file
+            output = BytesIO()
+            with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                df.to_excel(writer, index=True, sheet_name='Data')
+            output.seek(0)  # Reset buffer pointer to the beginning
+
+            # Create a Flask response with the Excel file
+            response = make_response(output.getvalue())
+            response.headers['Content-Disposition'] = 'attachment; filename=data.xlsx'
+            response.headers['Content-Type'] = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+            
+            return response
         except Exception as e:
             return jsonify({"success": False, "error": str(e)}), 500
     
