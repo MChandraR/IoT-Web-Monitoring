@@ -371,7 +371,7 @@
         temp.innerHTML = data.suhu+ "°c";
         hum.innerHTML = data.kelembaban + "%";
         wind.innerHTML = data.windspeed + " m/s";
-        pressure.innerHTML = parseInt(data.tekanan) + " hPa";
+        pressure.innerHTML = parseInt(data.tekanan) + " Pa";
         battery.innerHTML =  data.tegangan+"V";
         kondisi.innerHTML =  `∙ ${data.kondisiCuaca} ∙`;
         let sameDay = data.tanggal == `${('0000'+date.getFullYear()).slice(-4)}-${('00'+(date.getMonth()+1)).slice(-2)}-${('00'+date.getDate()).slice(-2)}`;
